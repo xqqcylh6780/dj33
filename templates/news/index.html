@@ -1,0 +1,136 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/news/index.css' %}">
+{% endblock %}
+      {% block main_contain %}
+    <div class="main-contain">
+      <!-- banner start -->
+        <div class="banner">
+            <ul class="pic">
+                <!--淡入淡出banner-->
+
+                <li><a href="javascript:void(0);"><img src="{% static 'images/ui.png' %}" alt="test"></a></li>
+
+
+                <li><a href="javascript:void(0);"><img src="{% static 'images/youxi.png' %}" alt="test"></a></li>
+
+
+                <li><a href="javascript:void(0);"><img src="{% static 'images/dianshang.png' %}" alt="test"></a></li>
+
+
+                <li><a href="javascript:void(0);"><img src="{% static 'images/zimeiti.png' %}" alt="test"></a></li>
+
+
+                <li><a href="javascript:void(0);"><img src="{% static 'images/python_gui.jpg' %}" alt="test"></a></li>
+
+
+                <li><a href="javascript:void(0);"><img src="{% static 'images/linux.jpg' %}" alt="test"></a></li>
+
+
+            </ul>
+            <a href="javascript:void(0);" class="btn prev">
+                <i class="PyWhich py-arrow-left"></i></a>
+            <a href="javascript:void(0);" class="btn next">
+                <i class="PyWhich py-arrow-right"></i></a>
+            <ul class="tab">
+                <!-- 按钮数量必须和图片一致 -->
+
+
+                <li></li>
+
+
+                <li></li>
+
+
+                <li></li>
+
+
+                <li></li>
+
+
+                <li></li>
+
+
+                <li></li>
+
+
+            </ul>
+        </div>
+      <!-- banner end -->
+
+      <!-- content start -->
+      <div class="content">
+        <!-- recommend-news start -->
+          <ul class="recommend-news">
+    {% for n in hot %}
+    <li>
+      	<a href="javascript:void(0)" target="_blank">
+      		<div class="recommend-thumbnail">
+      	 		<img src="{{ n.news.image_url }}" alt="title">
+      		</div>
+      		<p class="info">{{ n.news.title }}</p>
+      	</a>
+    </li>
+   {% endfor %}
+</ul>
+        <!-- recommend-news end -->
+
+        <!--  news-nav start-->
+          <nav class="news-nav">
+              <ul class="clearfix">
+                  <li class="active"><a href="javascript:void(0)" data-id="0">最新资讯</a></li>
+                  {% for news_tag in  tags %}
+                    <li><a href="javascript:void(0)" data-id="{{ news_tag.id }}">{{ news_tag.name }}</a></li>
+                  {% endfor %}
+              </ul>
+          </nav>
+        <!--  news-nav end -->
+
+        <!-- news-contain start -->
+          <div class="news-contain">
+              <ul class="news-list">
+
+              </ul>
+          </div>
+        <!-- news-contain end -->
+
+        <!-- btn-more start -->
+        <a href="javascript:void(0);" class="btn-more">加载更多</a>
+        <!-- btn-more end -->
+      </div>
+      <!-- content end -->
+    </div>
+      {% endblock %}
+
+          {% block side_hot_recommend %}
+          <div class="side-hot-recommend">
+              <h3 class="hot-recommend">热门推荐</h3>
+              <ul class="hot-news-list">
+                {% for i in click_hot %}
+                  <li>
+                      <a href="/news/news/{{ i.id }}" target="_blank" class="hot-news-contain clearfix">
+                          <div class="hot-news-thumbnail">
+                              <img src="{{ i.image_url }}"
+                                   alt="">
+                          </div>
+                          <div class="hot-news-content">
+                              <p class="hot-news-title">{{ i.title }}</p>
+                              <div class="hot-news-other clearfix">
+                                  <span class="news-type">{{ i.tag.name }}</span>
+                                  <!--点击次数-->
+                                  <span class="click_num">点击量: {{ i.clicks }}次</span>
+                              </div>
+                          </div>
+                      </a>
+                  </li>
+        {% endfor %}
+    </ul>
+          </div>
+          {% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/base/message.js' %}"></script>
+{% endblock %}
